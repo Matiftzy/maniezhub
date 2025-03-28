@@ -14,9 +14,9 @@ type Review = {
 const reviews: Review[] = [
   {
     id: 1,
-    name: "Alex Johnson",
-    role: "Casual Gamer",
-    content: "Maniez Hub completely changed how I play Roblox. The scripts are top-notch and the interface is super intuitive. I've tried other script hubs but this one is by far the most stable.",
+    name: "FuriousEmile",
+    role: "Dumbass Player",
+    content: "The script barley has any faulty, and ones that do, is because I use xeno. As someone who plays a lot it's hard to grind kills fast and this script is insanely good.",
     rating: 5,
   },
   {
