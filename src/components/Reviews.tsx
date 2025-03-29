@@ -21,9 +21,9 @@ const reviews: Review[] = [
   },
   {
     id: 2,
-    name: "Sarah Chen",
-    role: "Competitive Player",
-    content: "As someone who plays competitively, I need tools that are reliable and undetectable. Maniez Hub delivers on both fronts. The premium scripts give me the edge I need without compromising my account safety.",
+    name: "naomat",
+    role: "Korean Player",
+    content: "It's so easy to use and gets fast kills, EZ S Rank.",
     rating: 5,
   },
   {
