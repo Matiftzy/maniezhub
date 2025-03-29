@@ -63,8 +63,8 @@ const pricingPlans: PricingPlan[] = [
   {
     name: "Lifetime",
     price: "$5.49",
-    robuxPrice: "2859/2000 R$",
-    description: "For serious developers and power users",
+    robuxPrice: "2000 R$",
+    description: "For serious gamebroker and power users.",
     features: [
       { text: "Enterprise-grade execution", included: true },
       { text: "Complete script library access", included: true },
