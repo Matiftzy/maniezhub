@@ -193,7 +193,7 @@ const Pricing = () => {
   }, []);
 
   return (
-    <section id="pricing" className="py-24 clip-path-slant-bottom bg-accent relative">
+    <section id="pricing" className="py-24 bg-accent relative">
       {/* Background Pattern - set lowest z-index */}
       <div className="absolute inset-0 pointer-events-none" style={{ zIndex: "0" }}>
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:4rem_4rem]"></div>

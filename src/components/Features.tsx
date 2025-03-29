@@ -128,7 +128,7 @@ const Features = () => {
   }, []);
 
   return (
-    <section id="features" className="py-24 relative clip-path-slant-top bg-primary">
+    <section id="features" className="py-24 relative bg-primary">
       {/* Background Pattern - lowest z-index */}
       <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ zIndex: "1" }}>
         <div className="absolute w-full h-full bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.1)_0,transparent_50%)]"></div>
