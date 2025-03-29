@@ -236,13 +236,13 @@ const Pricing = () => {
           ))}
         </div>
 
-        <div className="mt-16 text-center animate-on-scroll relative z-50">
+        <div className="mt-16 text-center animate-on-scroll relative z-999999999">
           <p className="text-white/50 max-w-2xl mx-auto">
             All plans include access to our basic features. Upgrade or downgrade anytime. 
             <br />Need a custom solution? <a href={DISCORD_LINK} target="_blank" rel="noopener noreferrer" className="text-white underline hover:text-white/90 transition-colors">Contact us</a>.
           </p>
           {useRobux && pricingPlans[2].robuxPrice.includes('/') && (
-            <p className="text-white/70 mt-4 relative z-50">
+            <p className="text-white/70 mt-4 relative z-999999999">
               *Price becomes 2000 R$ during discount periods
             </p>
           )}
