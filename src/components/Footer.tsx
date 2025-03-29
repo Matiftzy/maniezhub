@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { cn } from '@/lib/utils';
 import { Link } from 'react-router-dom';
@@ -5,8 +6,8 @@ import { Github } from 'lucide-react';
 import Discord from '@/components/icons/Discord';
 
 const DISCORD_LINK = "https://discord.com/invite/U3CVFrMPeT";
-const TWITTER_LINK = "https://x.com/SKurantis";
-const GITHUB_LINK = "https://github.com/Matiftzy/Maniez-Hub";
+const TWITTER_LINK = "https://x.com/ManiezHub";
+const GITHUB_LINK = "https://github.com/Matiftzy/maniezhub";
 
 const Footer = () => {
   return (

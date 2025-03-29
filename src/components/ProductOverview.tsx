@@ -104,9 +104,20 @@ const ProductOverview = () => {
               <div className="absolute -inset-0.5 bg-gradient-to-r from-white/10 to-white/5 rounded-xl blur-sm"></div>
               <div className="relative bg-black rounded-xl overflow-hidden border border-white/10">
                 <div className="aspect-video flex items-center justify-center bg-secondary/50 p-6">
-                  {/* Interface mockup */}
-                  <div className="w-full max-w-lg">
-                    <div className="bg-black/70 backdrop-blur-md rounded-lg border border-white/10 p-4 mb-4">
+                  {/* Interface mockup with image overlay */}
+                  <div className="w-full max-w-lg relative">
+                    <img 
+                      src="/assets/maniezhubtsbg.png" 
+                      alt="Maniez Hub Interface" 
+                      className="absolute inset-0 w-full h-full object-cover z-10 rounded-lg"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.style.display = 'none';
+                      }}
+                    />
+                    
+                    {/* Backup content in case the image doesn't load */}
+                    <div className="bg-black/70 backdrop-blur-md rounded-lg border border-white/10 p-4 mb-4 relative z-0">
                       <div className="flex items-center justify-between mb-3">
                         <span className="text-sm font-medium">Maniez Hub v1.2</span>
                         <div className="flex gap-1">
@@ -135,7 +146,7 @@ const ProductOverview = () => {
                         ))}
                       </div>
                     </div>
-                    <div className="bg-black/70 backdrop-blur-md rounded-lg border border-white/10 p-4">
+                    <div className="bg-black/70 backdrop-blur-md rounded-lg border border-white/10 p-4 relative z-0">
                       <div className="bg-black/50 rounded border border-white/5 p-3 font-mono text-xs text-white/70 h-24 mb-3">
                         <div>print("Maniez Hub on TOP")</div>
                       </div>

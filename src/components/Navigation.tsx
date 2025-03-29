@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import { Link } from 'react-router-dom';
@@ -101,42 +102,35 @@ const Navigation = () => {
         </button>
       </div>
 
-      {/* Mobile Navigation */}
+      {/* Mobile Navigation - Smaller, not full-screen */}
       <div
         className={cn(
-          'fixed inset-0 bg-background/95 backdrop-blur-lg z-40 flex flex-col justify-center items-center gap-8 transition-transform duration-300 ease-in-out md:hidden',
-          isOpen ? 'translate-x-0' : 'translate-x-full'
+          'fixed top-16 right-4 w-64 bg-background/95 backdrop-blur-lg z-40 rounded-lg border border-white/10 shadow-lg transition-transform duration-300 ease-in-out md:hidden',
+          isOpen ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'
         )}
       >
-        {/* Close button for mobile menu */}
-        <button 
-          onClick={toggleMenu} 
-          className="absolute top-6 right-6 text-white"
-          aria-label="Close Menu"
-        >
-          <X size={24} />
-        </button>
-        
-        {navLinks.map((link, index) => (
+        <div className="flex flex-col py-6 px-4 gap-4">
+          {navLinks.map((link, index) => (
+            <a
+              key={index}
+              href={link.href}
+              onClick={toggleMenu}
+              className="text-md font-medium text-white/80 hover:text-white transition-colors duration-300 py-2"
+            >
+              {link.name}
+            </a>
+          ))}
           <a
-            key={index}
-            href={link.href}
+            href={DISCORD_LINK}
+            target="_blank"
+            rel="noopener noreferrer"
             onClick={toggleMenu}
-            className="text-xl font-medium text-white/80 hover:text-white transition-colors duration-300"
+            className="mt-2 text-md font-medium px-4 py-3 bg-white text-black rounded-lg hover:opacity-90 transition-all duration-300 flex items-center justify-center gap-2"
           >
-            {link.name}
+            <Discord size={18} />
+            Join Discord
           </a>
-        ))}
-        <a
-          href={DISCORD_LINK}
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={toggleMenu}
-          className="text-xl font-medium px-6 py-3 bg-white text-black rounded-lg hover:opacity-90 transition-all duration-300 mt-4 flex items-center gap-2"
-        >
-          <Discord size={20} />
-          Join Discord
-        </a>
+        </div>
       </div>
     </header>
   );

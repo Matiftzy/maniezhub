@@ -19,6 +19,7 @@ type PricingPlan = {
   features: PlanFeature[];
   popular?: boolean;
   callToAction: string;
+  periodText?: string;
 };
 
 const pricingPlans: PricingPlan[] = [
@@ -38,6 +39,7 @@ const pricingPlans: PricingPlan[] = [
       { text: "Multiple active sessions", included: false },
     ],
     callToAction: "Get Started",
+    periodText: "/month"
   },
   {
     name: "Premium",
@@ -56,6 +58,7 @@ const pricingPlans: PricingPlan[] = [
     ],
     popular: true,
     callToAction: "Get Premium",
+    periodText: "/month"
   },
   {
     name: "Lifetime",
@@ -73,6 +76,7 @@ const pricingPlans: PricingPlan[] = [
       { text: "Custom script development", included: true },
     ],
     callToAction: "Go Lifetime",
+    periodText: "/lifetime"
   },
 ];
 
@@ -88,6 +92,7 @@ const specialPlans: PricingPlan[] = [
       { text: "All Character", included: false },
     ],
     callToAction: "Get Hourly Access",
+    periodText: "/hour"
   },
   {
     name: "Lifetime",
@@ -100,6 +105,7 @@ const specialPlans: PricingPlan[] = [
       { text: "All Character", included: true },
     ],
     callToAction: "Get Lifetime Access",
+    periodText: "/lifetime"
   },
 ];
 
@@ -123,7 +129,7 @@ const PricingCard = ({ plan, useRobux }: { plan: PricingPlan; useRobux: boolean 
         <h3 className="text-2xl font-semibold mb-1">{plan.name}</h3>
         <div className="flex items-end gap-1 mb-2">
           <span className="text-4xl font-bold font-display">{useRobux ? plan.robuxPrice : plan.price}</span>
-          <span className="text-white/70 mb-1">/month</span>
+          <span className="text-white/70 mb-1">{plan.periodText}</span>
         </div>
         <p className="text-white/70 mb-6">{plan.description}</p>
 
@@ -230,13 +236,13 @@ const Pricing = () => {
           ))}
         </div>
 
-        <div className="mt-16 text-center animate-on-scroll">
+        <div className="mt-16 text-center animate-on-scroll relative z-50">
           <p className="text-white/50 max-w-2xl mx-auto">
             All plans include access to our basic features. Upgrade or downgrade anytime. 
             <br />Need a custom solution? <a href={DISCORD_LINK} target="_blank" rel="noopener noreferrer" className="text-white underline hover:text-white/90 transition-colors">Contact us</a>.
           </p>
           {useRobux && pricingPlans[2].robuxPrice.includes('/') && (
-            <p className="text-white/70 mt-4">
+            <p className="text-white/70 mt-4 relative z-50">
               *Price becomes 2000 R$ during discount periods
             </p>
           )}
