@@ -101,11 +101,7 @@ const ProductOverview = () => {
 
           <div className="order-1 lg:order-2 animate-on-scroll">
             <div className="relative">
-              <div className="absolute -inset-0.5 bg-gradient-to-r from-white/10 to-white/5 rounded-xl blur-sm"></div>
-              <div className="relative bg-black rounded-xl overflow-hidden border border-white/10">
-                <div className="aspect-video flex items-center justify-center bg-secondary/50 p-6">
-                  {/* Interface mockup with image overlay */}
-                  <div className="w-full max-w-lg relative">
+            <div className="w-full max-w-lg relative">
                     <img 
                       src="/assets/maniezhubtsbg.png" 
                       alt="Maniez Hub Interface" 
@@ -115,7 +111,9 @@ const ProductOverview = () => {
                         target.style.display = 'none';
                       }}
                     />
-                    
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-white/10 to-white/5 rounded-xl blur-sm"></div>
+              <div className="relative bg-black rounded-xl overflow-hidden border border-white/10">
+                <div className="aspect-video flex items-center justify-center bg-secondary/50 p-6">
                     {/* Backup content in case the image doesn't load */}
                     <div className="bg-black/70 backdrop-blur-md rounded-lg border border-white/10 p-4 mb-4 relative z-0">
                       <div className="flex items-center justify-between mb-3">
