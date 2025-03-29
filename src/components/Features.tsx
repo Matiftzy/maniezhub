@@ -135,7 +135,7 @@ const Features = () => {
       </div>
 
       <div className="container mx-auto px-6 relative z-10">
-        <div className="text-center mb-16 animate-on-scroll relative z-50">
+        <div className="text-center mb-16 animate-on-scroll relative z-9999999">
           <h2 className="text-4xl md:text-5xl font-bold font-display mb-4">
             Powerful <span className="text-gradient">Features</span>
           </h2>
