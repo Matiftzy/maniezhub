@@ -124,7 +124,7 @@
   }
 
   .animate-marquee {
-    animation: marquee 20s linear infinite; /* Changed from 30s to 20s for faster scrolling */
+    animation: marquee 15s linear infinite; /* Changed from 20s to 15s for even faster scrolling */
     display: flex;
   }
 

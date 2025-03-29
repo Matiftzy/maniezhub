@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import { Shield, Zap, Code, PenTool, Search, UserCircle } from 'lucide-react';
@@ -129,13 +128,13 @@ const Features = () => {
 
   return (
     <section id="features" className="py-24 relative clip-path-slant-top bg-primary">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-10 pointer-events-none">
+      {/* Background Pattern - set lowest z-index */}
+      <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ zIndex: "0" }}>
         <div className="absolute w-full h-full bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.1)_0,transparent_50%)]"></div>
       </div>
 
       <div className="container mx-auto px-6 relative z-10">
-        <div className="text-center mb-16 animate-on-scroll relative z-9999999">
+        <div className="text-center mb-16 animate-on-scroll relative" style={{ zIndex: "999" }}>
           <h2 className="text-4xl md:text-5xl font-bold font-display mb-4">
             Powerful <span className="text-gradient">Features</span>
           </h2>
@@ -155,7 +154,7 @@ const Features = () => {
           ))}
         </div>
 
-        {/* Marquee/Scrolling Banner */}
+        {/* Marquee/Scrolling Banner - Updated speed */}
         <ImageMarquee />
 
         {/* Statistics */}

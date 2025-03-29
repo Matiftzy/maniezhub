@@ -194,7 +194,8 @@ const Pricing = () => {
 
   return (
     <section id="pricing" className="py-24 clip-path-slant-bottom bg-accent relative">
-      <div className="absolute inset-0 pointer-events-none">
+      {/* Background Pattern - set lowest z-index */}
+      <div className="absolute inset-0 pointer-events-none" style={{ zIndex: "0" }}>
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:4rem_4rem]"></div>
       </div>
 
@@ -236,13 +237,13 @@ const Pricing = () => {
           ))}
         </div>
 
-        <div className="mt-16 text-center animate-on-scroll relative z-999999999">
-          <p className="text-white/50 max-w-2xl mx-auto">
+        <div className="mt-16 text-center animate-on-scroll" style={{ zIndex: "999", position: "relative" }}>
+          <p className="text-white/50 max-w-2xl mx-auto" style={{ zIndex: "9999" }}>
             All plans include access to our basic features. Upgrade or downgrade anytime. 
             <br />Need a custom solution? <a href={DISCORD_LINK} target="_blank" rel="noopener noreferrer" className="text-white underline hover:text-white/90 transition-colors">Contact us</a>.
           </p>
           {useRobux && pricingPlans[2].robuxPrice.includes('/') && (
-            <p className="text-white/70 mt-4 relative z-999999999">
+            <p className="text-white/70 mt-4" style={{ zIndex: "9999" }}>
               *Price becomes 2000 R$ during discount periods
             </p>
           )}
