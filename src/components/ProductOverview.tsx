@@ -75,8 +75,8 @@ const ProductOverview = () => {
   return (
     <section id="product" ref={sectionRef} className="py-24 relative overflow-hidden">
       {/* Background Pattern - set lowest z-index */}
-      <div className="absolute inset-0 pointer-events-none" style={{ zIndex: "1" }}>
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.025)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.025)_1px,transparent_1px)] bg-[size:4rem_4rem] z-index[-1]"></div>
+      <div className="absolute inset-0 pointer-events-none" style={{ zIndex: "-99" }}>
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.025)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.025)_1px,transparent_1px)] bg-[size:4rem_4rem] z-index[-99]"></div>
       </div>
 
       <div className="container mx-auto px-6 relative" style={{ zIndex: "5" }}>
