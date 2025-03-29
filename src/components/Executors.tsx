@@ -49,7 +49,7 @@ const executorsList: ExecutorProps[] = [
     description: "Velocity is an upcoming executor with 99% sUNC and level 8 capabilities, offering premium execution to its users for free.",
     discord: "discord.gg/getvelocity",
     website: "No Official Website",
-    recommended: "RECOMMENDED FOR MULTIPLE CLIENT FARM",
+    recommended: "RECOMMENDED",
   },
   {
     name: "Swift",
@@ -60,7 +60,7 @@ const executorsList: ExecutorProps[] = [
     description: "Swift offers a freemium scripting utility with high UNC and a fast support team.",
     discord: "discord.gg/getswift",
     website: "getswift.xyz",
-    recommended: "RECOMMENDED",
+    recommended: "VERY RECOMMENDED",
   },
   {
     name: "Arceus X",
@@ -69,9 +69,9 @@ const executorsList: ExecutorProps[] = [
     unc: "99%",
     sunc: "99%",
     description: "Arceus X is a leading script executor for Roblox that allows users to run scripts to modify and enhance their gaming experience. It is compatible with Android and iOS.",
-    discord: "arceus",
+    discord: "discord.gg/arceus",
     website: "spdmteam.com",
-    recommended: "RECOMMENDED FOR MOBILE",
+    recommended: "MOBILE RECOMMENDED",
   },
 ];
 
