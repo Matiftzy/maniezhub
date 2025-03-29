@@ -1,5 +1,5 @@
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { cn } from '@/lib/utils';
 
 const scriptImages = [
@@ -26,6 +26,7 @@ const scriptLinks = [
 
 const ProductOverview = () => {
   const sectionRef = useRef<HTMLElement>(null);
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -49,14 +50,18 @@ const ProductOverview = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const handleImageLoad = () => {
+    setImageLoaded(true);
+  };
+
   return (
     <section id="product" ref={sectionRef} className="py-24 relative overflow-hidden">
       {/* Background Pattern - set lowest z-index */}
-      <div className="absolute inset-0 pointer-events-none" style={{ zIndex: "-1" }}>
+      <div className="absolute inset-0 pointer-events-none" style={{ zIndex: "1" }}>
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.025)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.025)_1px,transparent_1px)] bg-[size:4rem_4rem]"></div>
       </div>
 
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="container mx-auto px-6 relative" style={{ zIndex: "5" }}>
         <div className="text-center mb-16 animate-on-scroll">
           <h2 className="text-4xl md:text-5xl font-bold font-display mb-4">
             Product <span className="text-gradient">Overview</span>
@@ -102,57 +107,68 @@ const ProductOverview = () => {
           <div className="order-1 lg:order-2 animate-on-scroll">
             <div className="relative">
               <div className="w-full max-w-lg relative">
-                <img 
-                  src="/assets/maniezhubtsbg.png" 
-                  alt="Maniez Hub Interface" 
-                  className="absolute inset-0 w-full h-full object-cover z-10 rounded-lg"
-                  style={{ objectFit: "contain", height: "100%" }}
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    target.style.display = 'none';
-                  }}
-                />
-                <div className="absolute -inset-0.5 bg-gradient-to-r from-white/10 to-white/5 rounded-xl blur-sm"></div>
-                <div className="relative bg-black rounded-xl overflow-hidden border border-white/10">
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-white/10 to-white/5 rounded-xl blur-sm" style={{ zIndex: "2" }}></div>
+                <div className="relative bg-black rounded-xl overflow-hidden border border-white/10" style={{ zIndex: "3" }}>
                   <div className="aspect-video flex items-center justify-center bg-secondary/50 p-6">
-                    {/* Backup content in case the image doesn't load */}
-                    <div className="bg-black/70 backdrop-blur-md rounded-lg border border-white/10 p-4 mb-4 relative z-0">
-                      <div className="flex items-center justify-between mb-3">
-                        <span className="text-sm font-medium">Maniez Hub v1.2</span>
-                        <div className="flex gap-1">
-                          <div className="w-3 h-3 rounded-full bg-white/20"></div>
-                          <div className="w-3 h-3 rounded-full bg-white/20"></div>
-                          <div className="w-3 h-3 rounded-full bg-white/20"></div>
-                        </div>
-                      </div>
-                      <div className="grid grid-cols-4 gap-2">
-                        {scriptImages.map((src, index) => (
-                          <a 
-                            key={index} 
-                            href={scriptLinks[index]}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="aspect-square rounded bg-white/5 hover:bg-white/10 transition-colors cursor-pointer flex items-center justify-center overflow-hidden"
-                          >
-                            <div className="w-full h-full overflow-hidden">
-                              <img 
-                                src={src} 
-                                alt={`Script ${index + 1}`} 
-                                className="w-full h-full object-cover"
-                              />
+                    <img 
+                      src="/assets/maniezhubtsbg.png" 
+                      alt="Maniez Hub Interface" 
+                      className="absolute inset-0 w-full h-full object-cover rounded-lg"
+                      style={{ 
+                        objectFit: "cover", 
+                        height: "100%", 
+                        zIndex: "4",
+                        display: imageLoaded ? "block" : "none" 
+                      }}
+                      onLoad={handleImageLoad}
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.style.display = 'none';
+                      }}
+                    />
+                    
+                    {/* Backup content - only visible if image fails to load */}
+                    {!imageLoaded && (
+                      <>
+                        <div className="bg-black/70 backdrop-blur-md rounded-lg border border-white/10 p-4 mb-4 relative z-3">
+                          <div className="flex items-center justify-between mb-3">
+                            <span className="text-sm font-medium">Maniez Hub v1.2</span>
+                            <div className="flex gap-1">
+                              <div className="w-3 h-3 rounded-full bg-white/20"></div>
+                              <div className="w-3 h-3 rounded-full bg-white/20"></div>
+                              <div className="w-3 h-3 rounded-full bg-white/20"></div>
                             </div>
-                          </a>
-                        ))}
-                      </div>
-                    </div>
-                    <div className="bg-black/70 backdrop-blur-md rounded-lg border border-white/10 p-4 relative z-0">
-                      <div className="bg-black/50 rounded border border-white/5 p-3 font-mono text-xs text-white/70 h-24 mb-3">
-                        <div>print("Maniez Hub on TOP")</div>
-                      </div>
-                      <div className="flex justify-end">
-                        <span className="inline-block px-3 py-1 bg-white text-black text-xs rounded">Execute</span>
-                      </div>
-                    </div>
+                          </div>
+                          <div className="grid grid-cols-4 gap-2">
+                            {scriptImages.map((src, index) => (
+                              <a 
+                                key={index} 
+                                href={scriptLinks[index]}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="aspect-square rounded bg-white/5 hover:bg-white/10 transition-colors cursor-pointer flex items-center justify-center overflow-hidden"
+                              >
+                                <div className="w-full h-full overflow-hidden">
+                                  <img 
+                                    src={src} 
+                                    alt={`Script ${index + 1}`} 
+                                    className="w-full h-full object-cover"
+                                  />
+                                </div>
+                              </a>
+                            ))}
+                          </div>
+                        </div>
+                        <div className="bg-black/70 backdrop-blur-md rounded-lg border border-white/10 p-4 relative z-3">
+                          <div className="bg-black/50 rounded border border-white/5 p-3 font-mono text-xs text-white/70 h-24 mb-3">
+                            <div>print("Maniez Hub on TOP")</div>
+                          </div>
+                          <div className="flex justify-end">
+                            <span className="inline-block px-3 py-1 bg-white text-black text-xs rounded">Execute</span>
+                          </div>
+                        </div>
+                      </>
+                    )}
                   </div>
                 </div>
               </div>
