@@ -26,7 +26,8 @@ const scriptLinks = [
 
 const ProductOverview = () => {
   const sectionRef = useRef<HTMLElement>(null);
-  const [imageLoaded, setImageLoaded] = useState(false);
+  const imageRef = useRef<HTMLDivElement>(null);
+  const [tiltValues, setTiltValues] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
     const handleScroll = () => {
@@ -50,8 +51,25 @@ const ProductOverview = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleImageLoad = () => {
-    setImageLoaded(true);
+  // Add hover tilt effect handlers
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!imageRef.current) return;
+    
+    const rect = imageRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    
+    const tiltX = (y - centerY) / 10;
+    const tiltY = (centerX - x) / 10;
+    
+    setTiltValues({ x: tiltX, y: tiltY });
+  };
+  
+  const handleMouseLeave = () => {
+    setTiltValues({ x: 0, y: 0 });
   };
 
   return (
@@ -105,71 +123,25 @@ const ProductOverview = () => {
           </div>
 
           <div className="order-1 lg:order-2 animate-on-scroll">
-            <div className="relative">
-              <div className="w-full max-w-lg relative">
-                <div className="absolute -inset-0.5 bg-gradient-to-r from-white/10 to-white/5 rounded-xl blur-sm" style={{ zIndex: "2" }}></div>
-                <div className="relative bg-black rounded-xl overflow-hidden border border-white/10" style={{ zIndex: "3" }}>
-                  <div className="aspect-video flex items-center justify-center bg-secondary/50 p-6">
-                    <img 
-                      src="/assets/maniezhubtsbg.png" 
-                      alt="Maniez Hub Interface" 
-                      className="absolute inset-0 w-full h-full object-cover rounded-lg"
-                      style={{ 
-                        objectFit: "cover", 
-                        height: "100%", 
-                        zIndex: "4",
-                        display: imageLoaded ? "block" : "none" 
-                      }}
-                      onLoad={handleImageLoad}
-                      onError={(e) => {
-                        const target = e.target as HTMLImageElement;
-                        target.style.display = 'none';
-                      }}
-                    />
-                    
-                    {/* Backup content - only visible if image fails to load */}
-                    {!imageLoaded && (
-                      <>
-                        <div className="bg-black/70 backdrop-blur-md rounded-lg border border-white/10 p-4 mb-4 relative z-3">
-                          <div className="flex items-center justify-between mb-3">
-                            <span className="text-sm font-medium">Maniez Hub v1.2</span>
-                            <div className="flex gap-1">
-                              <div className="w-3 h-3 rounded-full bg-white/20"></div>
-                              <div className="w-3 h-3 rounded-full bg-white/20"></div>
-                              <div className="w-3 h-3 rounded-full bg-white/20"></div>
-                            </div>
-                          </div>
-                          <div className="grid grid-cols-4 gap-2">
-                            {scriptImages.map((src, index) => (
-                              <a 
-                                key={index} 
-                                href={scriptLinks[index]}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="aspect-square rounded bg-white/5 hover:bg-white/10 transition-colors cursor-pointer flex items-center justify-center overflow-hidden"
-                              >
-                                <div className="w-full h-full overflow-hidden">
-                                  <img 
-                                    src={src} 
-                                    alt={`Script ${index + 1}`} 
-                                    className="w-full h-full object-cover"
-                                  />
-                                </div>
-                              </a>
-                            ))}
-                          </div>
-                        </div>
-                        <div className="bg-black/70 backdrop-blur-md rounded-lg border border-white/10 p-4 relative z-3">
-                          <div className="bg-black/50 rounded border border-white/5 p-3 font-mono text-xs text-white/70 h-24 mb-3">
-                            <div>print("Maniez Hub on TOP")</div>
-                          </div>
-                          <div className="flex justify-end">
-                            <span className="inline-block px-3 py-1 bg-white text-black text-xs rounded">Execute</span>
-                          </div>
-                        </div>
-                      </>
-                    )}
-                  </div>
+            <div 
+              ref={imageRef}
+              className="relative transition-transform duration-300 ease-out transform-gpu"
+              style={{ 
+                transform: `perspective(1000px) rotateX(${tiltValues.x}deg) rotateY(${tiltValues.y}deg) scale3d(1, 1, 1)`,
+                transformStyle: 'preserve-3d'
+              }}
+              onMouseMove={handleMouseMove}
+              onMouseLeave={handleMouseLeave}
+            >
+              <div className="w-full max-w-lg mx-auto">
+                <div className="relative rounded-xl overflow-hidden shadow-2xl">
+                  <div className="absolute -inset-0.5 bg-gradient-to-r from-white/10 to-white/5 rounded-xl blur-sm"></div>
+                  <img 
+                    src="/assets/maniezhubtsbg.png" 
+                    alt="Maniez Hub Interface" 
+                    className="w-full h-full object-cover rounded-lg border border-white/10"
+                    style={{ transformStyle: 'preserve-3d', transform: 'translateZ(20px)' }}
+                  />
                 </div>
               </div>
             </div>
