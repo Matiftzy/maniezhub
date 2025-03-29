@@ -137,7 +137,7 @@ const ProductOverview = () => {
                     </div>
                     <div className="bg-black/70 backdrop-blur-md rounded-lg border border-white/10 p-4">
                       <div className="bg-black/50 rounded border border-white/5 p-3 font-mono text-xs text-white/70 h-24 mb-3">
-                        <div>loadstring(game:HttpGet("https://raw.githubusercontent.com/Matiftzy/Maniez-Hub/refs/heads/main/loader.lua"))()</div>
+                        <div>print("Maniez Hub on TOP")</div>
                       </div>
                       <div className="flex justify-end">
                         <span className="inline-block px-3 py-1 bg-white text-black text-xs rounded">Execute</span>
