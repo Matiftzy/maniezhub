@@ -114,7 +114,7 @@ const Clownery = () => {
     },
     {
       imageSrc: "https://github.com/Matiftzy/maniezhub/blob/main/public/assets/thisyoscripts.png?raw=true",
-      soundSrc: "https://github.com/Matiftzy/maniezhub/raw/refs/heads/main/public/assets/laugh.mp3",
+      soundSrc: "https://github.com/Matiftzy/maniezhub/raw/refs/heads/main/public/assets/fart.mp3",
       comment: "is this ur owner's script? 😭😭"
     },
     {
@@ -124,7 +124,7 @@ const Clownery = () => {
     },
     {
       imageSrc: "https://github.com/Matiftzy/maniezhub/blob/main/public/assets/antiafkclown.png?raw=true",
-      soundSrc: "https://github.com/Matiftzy/maniezhub/raw/refs/heads/main/public/assets/fart.mp3",
+      soundSrc: "https://github.com/Matiftzy/maniezhub/raw/refs/heads/main/public/assets/laugh.mp3",
       comment: "no comment 💀💀",
       smallSize: true  // Make this box smaller
     },
