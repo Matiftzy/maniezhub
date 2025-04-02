@@ -1,17 +1,22 @@
 
 import React, { useRef, useState } from 'react';
 import { Button } from './ui/button';
-import { VolumeX, Volume2 } from 'lucide-react';
+import { VolumeX, Volume2, ZoomIn, X } from 'lucide-react';
+import { Card, CardContent } from './ui/card';
+import { AspectRatio } from './ui/aspect-ratio';
+import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
 
 interface ClowneryItemProps {
   imageSrc: string;
   soundSrc: string;
   comment: string;
+  smallSize?: boolean;
 }
 
-const ClowneryItem: React.FC<ClowneryItemProps> = ({ imageSrc, soundSrc, comment }) => {
+const ClowneryItem: React.FC<ClowneryItemProps> = ({ imageSrc, soundSrc, comment, smallSize }) => {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isZoomed, setIsZoomed] = useState(false);
 
   const toggleSound = () => {
     if (!audioRef.current) return;
@@ -30,15 +35,20 @@ const ClowneryItem: React.FC<ClowneryItemProps> = ({ imageSrc, soundSrc, comment
     setIsPlaying(false);
   };
 
+  // Class for smaller boxes
+  const boxClass = smallSize 
+    ? "flex flex-col items-center mb-8 p-3 bg-zinc-800/50 rounded-lg border border-zinc-700 h-[85%]" 
+    : "flex flex-col items-center mb-8 p-4 bg-zinc-800/50 rounded-lg border border-zinc-700";
+
   return (
-    <div className="flex flex-col items-center mb-8 p-4 bg-zinc-800/50 rounded-lg border border-zinc-700">
+    <div className={boxClass}>
       <div className="relative w-full max-w-md">
         <img 
           src={imageSrc} 
           alt="Clownery content" 
-          className="w-full rounded-md shadow-lg"
+          className="w-full rounded-md shadow-lg cursor-pointer"
         />
-        <div className="absolute top-2 right-2">
+        <div className="absolute top-2 right-2 flex space-x-2">
           <Button 
             onClick={toggleSound} 
             variant="outline" 
@@ -48,6 +58,41 @@ const ClowneryItem: React.FC<ClowneryItemProps> = ({ imageSrc, soundSrc, comment
             {isPlaying ? <VolumeX className="h-4 w-4 mr-1" /> : <Volume2 className="h-4 w-4 mr-1" />}
             {isPlaying ? "Stop" : "Play"}
           </Button>
+          
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button 
+                variant="outline" 
+                size="sm"
+                className="bg-zinc-900/80 hover:bg-zinc-800 text-white border-zinc-700"
+              >
+                <ZoomIn className="h-4 w-4 mr-1" />
+                Zoom
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-[90vw] max-w-[800px] p-0 bg-zinc-900 border-zinc-700">
+              <div className="relative">
+                <AspectRatio ratio={16/9}>
+                  <img 
+                    src={imageSrc} 
+                    alt="Zoomed content" 
+                    className="object-contain w-full h-full"
+                  />
+                </AspectRatio>
+                <Button 
+                  variant="outline" 
+                  size="icon"
+                  className="absolute top-2 right-2 bg-zinc-900/80 hover:bg-zinc-800 text-white border-zinc-700"
+                  onClick={() => setIsZoomed(false)}
+                >
+                  <X className="h-4 w-4" />
+                </Button>
+              </div>
+              <div className="p-3 border-t border-zinc-700">
+                <p className="text-sm text-zinc-300 italic">{comment}</p>
+              </div>
+            </PopoverContent>
+          </Popover>
         </div>
         <audio ref={audioRef} src={soundSrc} onEnded={handleAudioEnded} />
       </div>
@@ -81,12 +126,14 @@ const Clownery = () => {
     {
       imageSrc: "https://github.com/Matiftzy/maniezhub/blob/main/public/assets/antiafkclown.png?raw=true",
       soundSrc: "https://github.com/Matiftzy/maniezhub/raw/refs/heads/main/public/assets/stinky.mp3",
-      comment: "no comment 💀💀"
+      comment: "no comment 💀💀",
+      smallSize: true  // Make this box smaller
     },
     {
       imageSrc: "https://github.com/Matiftzy/maniezhub/blob/main/public/assets/clown4sensor.png?raw=true",
       soundSrc: "https://github.com/Matiftzy/maniezhub/raw/refs/heads/main/public/assets/stinky.mp3",
-      comment: "it's really pitiful for this dog, being ordered to bark 😢🥺😓"
+      comment: "it's really pitiful for this dog, being ordered to bark 😢🥺😓",
+      smallSize: true  // Make this box smaller
     }
   ];
 
@@ -101,6 +148,7 @@ const Clownery = () => {
               imageSrc={item.imageSrc}
               soundSrc={item.soundSrc}
               comment={item.comment}
+              smallSize={item.smallSize}
             />
           ))}
         </div>
