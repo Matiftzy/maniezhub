@@ -1,4 +1,3 @@
-
 import React, { useRef, useState } from 'react';
 import { Button } from './ui/button';
 import { VolumeX, Volume2, ZoomIn, X } from 'lucide-react';
@@ -16,7 +15,7 @@ interface ClowneryItemProps {
 const ClowneryItem: React.FC<ClowneryItemProps> = ({ imageSrc, soundSrc, comment, smallSize }) => {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [isZoomed, setIsZoomed] = useState(false);
+  const [open, setOpen] = useState(false);
 
   const toggleSound = () => {
     if (!audioRef.current) return;
@@ -59,7 +58,7 @@ const ClowneryItem: React.FC<ClowneryItemProps> = ({ imageSrc, soundSrc, comment
             {isPlaying ? "Stop" : "Play"}
           </Button>
           
-          <Popover>
+          <Popover open={open} onOpenChange={setOpen}>
             <PopoverTrigger asChild>
               <Button 
                 variant="outline" 
@@ -83,7 +82,7 @@ const ClowneryItem: React.FC<ClowneryItemProps> = ({ imageSrc, soundSrc, comment
                   variant="outline" 
                   size="icon"
                   className="absolute top-2 right-2 bg-zinc-900/80 hover:bg-zinc-800 text-white border-zinc-700"
-                  onClick={() => setIsZoomed(false)}
+                  onClick={() => setOpen(false)}
                 >
                   <X className="h-4 w-4" />
                 </Button>
