@@ -36,7 +36,7 @@ const ClowneryItem: React.FC<ClowneryItemProps> = ({ imageSrc, soundSrc, comment
 
   // Class for smaller boxes
   const boxClass = smallSize 
-    ? "flex flex-col items-center mb-8 p-3 bg-zinc-800/50 rounded-lg border border-zinc-700 h-[85%]" 
+    ? "flex flex-col items-center mb-8 p-3 bg-zinc-800/50 rounded-lg border border-zinc-700 h-[50%]" 
     : "flex flex-col items-center mb-8 p-4 bg-zinc-800/50 rounded-lg border border-zinc-700";
 
   return (
