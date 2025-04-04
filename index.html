@@ -21,11 +21,21 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-</head>
+
+    <style>
+      /* Sembunyikan badge dari awal */
+      #lovable-badge {
+        display: none !important;
+        visibility: hidden !important;
+      }
+    </style>
+  </head>
 
   <body>
     <div id="root"></div>
+
     <script>
+      // Pastikan badge dihapus dari DOM saat halaman sudah siap
       document.addEventListener("DOMContentLoaded", function () {
         const badge = document.getElementById("lovable-badge");
         if (badge) {
@@ -34,6 +44,7 @@
         }
       });
     </script>
+
     <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
     <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
     <script type="module" src="/src/main.tsx"></script>
