@@ -16,15 +16,22 @@
     <meta name="twitter:site" content="@maniezhub" />
     <meta name="twitter:image" content="https://github.com/Matiftzy/maniezhub/blob/main/public/assets/image.png?raw=true" />
 
-    <!-- Favicon -->
     <link rel="icon" type="image/png" href="https://github.com/Matiftzy/maniezhub/blob/main/public/assets/logo.png?raw=true" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-</head>
+
+    <style>
+      #lovable-badge {
+        display: none !important;
+        visibility: hidden !important;
+      }
+    </style>
+  </head>
 
   <body>
     <div id="root"></div>
+
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         const badge = document.getElementById("lovable-badge");
@@ -34,7 +41,7 @@
         }
       });
     </script>
-    <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
+
     <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
