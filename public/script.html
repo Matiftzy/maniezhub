@@ -1,0 +1,48 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Script</title>
+  <script>
+    // Deteksi sederhana untuk executor Roblox
+    function isRobloxExecutor() {
+      try {
+        // Periksa User-Agent dan fitur khusus Roblox executor
+        const userAgent = navigator.userAgent.toLowerCase();
+        
+        // Executor biasanya memiliki beberapa kata kunci dalam user agent
+        const possibleExecutors = [
+          'roblox', 'synapse', 'script', 'exploit', 'krnl', 'executor', 
+          'fluxus', 'oxygen', 'electron', 'webkit', 'scriptware'
+        ];
+        
+        const isExecutor = possibleExecutors.some(term => userAgent.includes(term));
+        
+        // Periksa juga global variables khusus executor
+        const hasRobloxGlobals = 
+          typeof window !== 'undefined' && 
+          (
+            window.syn !== undefined || 
+            window.getgenv !== undefined || 
+            window.hookfunction !== undefined ||
+            window.getrawmetatable !== undefined
+          );
+        
+        return isExecutor || hasRobloxGlobals;
+      } catch (error) {
+        // Jika terjadi error, kembalikan false untuk keamanan
+        return false;
+      }
+    }
+
+    // Jika bukan dari executor Roblox, redirect ke halaman utama
+    if (!isRobloxExecutor()) {
+      window.location.href = '/';
+    }
+  </script>
+</head>
+<body style="margin:0; padding:0; background:#000;">
+<pre style="margin:0; padding:0; color:#fff; font-family:monospace;">print("hello")</pre>
+</body>
+</html>
