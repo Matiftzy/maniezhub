@@ -5,20 +5,14 @@
   <title>Unauthorized</title>
 </head>
 <body>
-<script>
-    // Deteksi jika diakses dari browser (bukan executor)
-    const userAgent = navigator.userAgent;
-
-    // Daftar user-agent umum dari browser (bisa ditambah sesuai kebutuhan)
-    const isBrowser = userAgent.includes("Mozilla") || userAgent.includes("Chrome") || userAgent.includes("Safari") || userAgent.includes("Firefox") || userAgent.includes("Edg");
-
-    if (isBrowser) {
-        // Ganti isi halaman dengan pesan error
-        document.body.innerHTML = "403 - Access Denied | You tryna skid lil bro?";
-    } else {
-        // Kalau bukan browser (kemungkinan dari executor), tampilkan script mentah
-        document.write(`print("hello")`);
-    }
-</script>
+    <script>
+        const isBrowser = navigator.userAgent.includes("Mozilla");
+    
+        if (isBrowser) {
+            document.write("403 Forbidden | Nice try, lil bro.");
+        } else {
+            document.write("print(\"hello\")");
+        }
+    </script>     
 </body>
 </html>
