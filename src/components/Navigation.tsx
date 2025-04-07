@@ -17,7 +17,7 @@ const navLinks: NavLink[] = [
   { name: 'Pricing', href: '#pricing' },
   { name: 'Reviews', href: '#reviews' },
   { name: 'FAQ', href: '#faq' },
-  { name: 'Script', href: '/script' }, // Tambahkan link Script baru
+  { name: 'Script', href: '/script.lua' }, // Tambahkan link Script baru
 ];
 
 const DISCORD_LINK = "https://discord.com/invite/U3CVFrMPeT";
