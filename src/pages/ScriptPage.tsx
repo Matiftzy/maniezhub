@@ -7,23 +7,27 @@ const ScriptPage = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Deteksi apakah request berasal dari Roblox executor
+    // Deteksi apakah request berasal dari Roblox executor dengan sistem yang lebih ketat
     const detectRobloxExecutor = () => {
       // Periksa User-Agent untuk mendeteksi Roblox executor
-      // Perhatikan: ini adalah deteksi sederhana dan bisa dibypass dengan mudah
       const userAgent = navigator.userAgent.toLowerCase();
       
-      // Periksa jika ini adalah executor Roblox
-      // Beberapa executor Roblox menggunakan User-Agent kustom atau memiliki pola tertentu
-      // Di sini kita menggunakan beberapa cek umum, tetapi tidak 100% akurat
-      const possibleExecutors = [
-        'roblox', 'synapse', 'script', 'exploit', 'krnl', 'executor', 
-        'fluxus', 'oxygen', 'electron', 'webkit', 'scriptware'
+      // Kunci deteksi: Browser biasa memiliki UA yang dikenal
+      const browserSignatures = [
+        'chrome', 'firefox', 'safari', 'edge', 'opera', 'brave', 
+        'vivaldi', 'seamonkey', 'navigator', 'msie', 'trident', 'gecko',
+        'webkit', 'mozilla'
       ];
       
-      const isExecutor = possibleExecutors.some(term => userAgent.includes(term));
+      // Jika memiliki signature browser umum & tidak memiliki signature executor, kemungkinan browser biasa
+      const isBrowser = browserSignatures.some(sig => userAgent.includes(sig)) && 
+        !userAgent.includes('roblox') && 
+        !userAgent.includes('synapse') && 
+        !userAgent.includes('fluxus') &&
+        !userAgent.includes('script') &&
+        !userAgent.includes('krnl');
       
-      // Deteksi tambahan untuk fitur-fitur yang biasanya hanya ada di executor
+      // Periksa jika ini adalah executor Roblox melalui global variables
       const hasRobloxGlobals = 
         typeof window !== 'undefined' && 
         (
@@ -34,25 +38,30 @@ const ScriptPage = () => {
           // @ts-ignore
           window.hookfunction !== undefined ||
           // @ts-ignore
-          window.getrawmetatable !== undefined
+          window.getrawmetatable !== undefined ||
+          // @ts-ignore
+          window.identifyexecutor !== undefined ||
+          // @ts-ignore
+          window.getexecutorname !== undefined
         );
       
-      return isExecutor || hasRobloxGlobals;
+      // Hanya izinkan akses jika sepertinya bukan browser biasa, atau memiliki global variables executor
+      return !isBrowser || hasRobloxGlobals;
     };
 
-    // Cek apakah pengguna diizinkan mengakses script
+    // Cek akses dengan delay kecil untuk memastikan script detector berjalan
     const checkAccess = () => {
-      // Cek dari executor Roblox
-      if (detectRobloxExecutor()) {
-        setIsAllowed(true);
-      } else {
-        // Jika bukan dari executor, periksa juga jika ini adalah admin atau
-        // akses khusus untuk testing purposes
-        // (ini adalah contoh, sebenarnya Anda bisa menambahkan logic yang lebih canggih)
-        const isAdmin = false; // ganti dengan logic yang sesuai jika diperlukan
-        setIsAllowed(isAdmin);
-      }
-      setIsLoading(false);
+      setTimeout(() => {
+        // Hanya ijinkan akses dari executor Roblox
+        const isExecutor = detectRobloxExecutor();
+        
+        // Untuk pengembangan/testing, Anda bisa menambahkan override di sini jika diperlukan
+        // misalnya dengan parameter khusus di URL atau kondisi lainnya
+        // contoh: const isAdmin = new URLSearchParams(window.location.search).has('admin_access');
+        
+        setIsAllowed(isExecutor);
+        setIsLoading(false);
+      }, 100);
     };
 
     checkAccess();
@@ -67,7 +76,7 @@ const ScriptPage = () => {
   }
 
   return (
-    <pre className="w-full min-h-screen bg-black text-white p-0 m-0 font-mono">
+    <pre className="w-full min-h-screen bg-black text-white p-0 m-0 font-mono overflow-hidden">
       {`print("hello")`}
     </pre>
   );

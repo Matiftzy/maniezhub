@@ -5,31 +5,46 @@
   <meta charset="UTF-8">
   <title>Script</title>
   <script>
-    // Deteksi sederhana untuk executor Roblox
+    // Deteksi lebih ketat untuk executor Roblox
     function isRobloxExecutor() {
       try {
         // Periksa User-Agent dan fitur khusus Roblox executor
         const userAgent = navigator.userAgent.toLowerCase();
         
-        // Executor biasanya memiliki beberapa kata kunci dalam user agent
-        const possibleExecutors = [
-          'roblox', 'synapse', 'script', 'exploit', 'krnl', 'executor', 
-          'fluxus', 'oxygen', 'electron', 'webkit', 'scriptware'
+        // Kunci deteksi: Executor biasanya memiliki UA khusus
+        const browserSignatures = [
+          'chrome', 'firefox', 'safari', 'edge', 'opera', 'brave', 
+          'vivaldi', 'seamonkey', 'navigator', 'msie', 'trident', 'gecko',
+          'webkit', 'mozilla'
         ];
         
-        const isExecutor = possibleExecutors.some(term => userAgent.includes(term));
+        // Jika memiliki signature browser umum & tidak memiliki signature executor, kemungkinan browser biasa
+        const isBrowser = browserSignatures.some(sig => userAgent.includes(sig)) && 
+          !userAgent.includes('roblox') && 
+          !userAgent.includes('synapse') && 
+          !userAgent.includes('fluxus') &&
+          !userAgent.includes('script') &&
+          !userAgent.includes('krnl');
         
-        // Periksa juga global variables khusus executor
+        // Periksa global variables khusus executor
         const hasRobloxGlobals = 
           typeof window !== 'undefined' && 
           (
             window.syn !== undefined || 
             window.getgenv !== undefined || 
             window.hookfunction !== undefined ||
-            window.getrawmetatable !== undefined
+            window.getrawmetatable !== undefined ||
+            window.identifyexecutor !== undefined ||
+            window.getexecutorname !== undefined
           );
         
-        return isExecutor || hasRobloxGlobals;
+        // Jika tidak memiliki global variables executor & terlihat seperti browser biasa
+        if (isBrowser && !hasRobloxGlobals) {
+          return false;
+        }
+        
+        // Default: ijinkan akses (untuk kompatibilitas dengan berbagai executor)
+        return true;
       } catch (error) {
         // Jika terjadi error, kembalikan false untuk keamanan
         return false;
