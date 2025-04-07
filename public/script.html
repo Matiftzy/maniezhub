@@ -1,63 +1,24 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Script</title>
-  <script>
-    // Deteksi lebih ketat untuk executor Roblox
-    function isRobloxExecutor() {
-      try {
-        // Periksa User-Agent dan fitur khusus Roblox executor
-        const userAgent = navigator.userAgent.toLowerCase();
-        
-        // Kunci deteksi: Executor biasanya memiliki UA khusus
-        const browserSignatures = [
-          'chrome', 'firefox', 'safari', 'edge', 'opera', 'brave', 
-          'vivaldi', 'seamonkey', 'navigator', 'msie', 'trident', 'gecko',
-          'webkit', 'mozilla'
-        ];
-        
-        // Jika memiliki signature browser umum & tidak memiliki signature executor, kemungkinan browser biasa
-        const isBrowser = browserSignatures.some(sig => userAgent.includes(sig)) && 
-          !userAgent.includes('roblox') && 
-          !userAgent.includes('synapse') && 
-          !userAgent.includes('fluxus') &&
-          !userAgent.includes('script') &&
-          !userAgent.includes('krnl');
-        
-        // Periksa global variables khusus executor
-        const hasRobloxGlobals = 
-          typeof window !== 'undefined' && 
-          (
-            window.syn !== undefined || 
-            window.getgenv !== undefined || 
-            window.hookfunction !== undefined ||
-            window.getrawmetatable !== undefined ||
-            window.identifyexecutor !== undefined ||
-            window.getexecutorname !== undefined
-          );
-        
-        // Jika tidak memiliki global variables executor & terlihat seperti browser biasa
-        if (isBrowser && !hasRobloxGlobals) {
-          return false;
-        }
-        
-        // Default: ijinkan akses (untuk kompatibilitas dengan berbagai executor)
-        return true;
-      } catch (error) {
-        // Jika terjadi error, kembalikan false untuk keamanan
-        return false;
-      }
-    }
-
-    // Jika bukan dari executor Roblox, redirect ke halaman utama
-    if (!isRobloxExecutor()) {
-      window.location.href = '/';
-    }
-  </script>
+  <title>Unauthorized</title>
 </head>
-<body style="margin:0; padding:0; background:#000;">
-<pre style="margin:0; padding:0; color:#fff; font-family:monospace;">print("hello")</pre>
+<body>
+<script>
+    // Deteksi jika diakses dari browser (bukan executor)
+    const userAgent = navigator.userAgent;
+
+    // Daftar user-agent umum dari browser (bisa ditambah sesuai kebutuhan)
+    const isBrowser = userAgent.includes("Mozilla") || userAgent.includes("Chrome") || userAgent.includes("Safari") || userAgent.includes("Firefox") || userAgent.includes("Edg");
+
+    if (isBrowser) {
+        // Ganti isi halaman dengan pesan error
+        document.body.innerHTML = "403 - Access Denied";
+    } else {
+        // Kalau bukan browser (kemungkinan dari executor), tampilkan script mentah
+        document.write(`print("hello")`);
+    }
+</script>
 </body>
 </html>
