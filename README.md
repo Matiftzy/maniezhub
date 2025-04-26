@@ -2,7 +2,7 @@
   <img src="https://github.com/Matiftzy/maniezhub/blob/main/public/assets/maniezhubbanner.png?raw=true" alt="Maniez Hub Banner" width="100%">
 </p>
 
-# 🍬 Maniez Hub
+# Maniez Hub
 
 **Smooth. Powerful. Reliable.**
 
