@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import { Link } from 'react-router-dom';
@@ -65,7 +66,7 @@ const Navigation = () => {
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         <div className="flex items-center gap-2">
           <Link to="/" className="text-2xl font-bold font-display tracking-tighter flex items-center">
-            <img src="/assets/maniez-logo.png" alt="Maniez Hub Logo" className="h-8 w-8 mr-2" />
+            <img src="/assets/logo.png" alt="Maniez Hub Logo" className="h-8 w-8 mr-2" />
             <span className="text-gradient">Maniez</span> Hub
           </Link>
         </div>
