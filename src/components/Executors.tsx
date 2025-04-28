@@ -75,7 +75,7 @@ const executorsList: ExecutorProps[] = [
   },
   {
     name: "Delta",
-    logo: "assets/arceusx.png",
+    logo: "assets/delta.png",
     cost: "FREE",
     unc: "100%",
     sunc: "94%",
