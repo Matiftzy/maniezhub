@@ -1,7 +1,8 @@
+
 import React, { useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import { Badge } from '@/components/ui/badge';
-import { ExternalLink } from 'lucide-react';
+import { ExternalLink, Check, X } from 'lucide-react';
 import Globe from '@/components/icons/Globe';
 import Discord from '@/components/icons/Discord';
 
@@ -15,6 +16,8 @@ type ExecutorProps = {
   discord: string;
   website: string;
   recommended?: string;
+  decompiler: boolean;
+  multiInject: boolean;
 };
 
 const executorsList: ExecutorProps[] = [
@@ -22,56 +25,66 @@ const executorsList: ExecutorProps[] = [
     name: "AWP.GG",
     logo: "assets/awpgg.png",
     cost: "$6.99 weekly",
-    unc: "100%",
-    sunc: "99%",
+    unc: "99%",
+    sunc: "98%",
     description: "AWP is a sleek, undetected scripting utility with a user-friendly interface, perfect for everyone.",
     discord: "discord.gg/awpgg",
     website: "buyawp.gg",
     recommended: "RECOMMENDED",
+    decompiler: true,
+    multiInject: true,
   },
   {
     name: "Wave",
     logo: "assets/wave.png",
     cost: "$7.49 weekly",
-    unc: "100%",
+    unc: "99%",
     sunc: "100%",
     description: "Wave, one of the oldest paid scripting utilities, combines powerful performance with a user-friendly interface, trusted by many.",
     discord: "discord.gg/f6CQJPQT8X",
     website: "getwave.gg",
     recommended: "VERY RECOMMENDED",
+    decompiler: false,
+    multiInject: true,
   },
   {
     name: "Velocity",
     logo: "assets/velocitys.png",
     cost: "FREE",
     unc: "99%",
-    sunc: "99%",
-    description: "Velocity is an upcoming executor with 99% sUNC and level 8 capabilities, offering premium execution to its users for free.",
+    sunc: "90%",
+    description: "Velocity is an upcoming executor with 90% sUNC and level 8 capabilities, offering premium execution to its users for free.",
     discord: "discord.gg/getvelocity",
     website: "No Official Website",
     recommended: "RECOMMENDED",
+    decompiler: true,
+    multiInject: false,
   },
   {
     name: "Swift",
     logo: "assets/swift.png",
     cost: "FREE",
-    unc: "100%",
-    sunc: "98%",
+    unc: "99%",
+    sunc: "100%",
     description: "Swift offers a freemium scripting utility with high UNC and a fast support team.",
     discord: "discord.gg/getswift",
     website: "getswift.xyz",
     recommended: "VERY RECOMMENDED",
+    decompiler: true,
+    multiInject: false,
   },
   {
-    name: "Arceus X",
+    name: "Delta",
     logo: "assets/arceusx.png",
     cost: "FREE",
-    unc: "99%",
-    sunc: "99%",
-    description: "Arceus X is a leading script executor for Roblox that allows users to run scripts to modify and enhance their gaming experience. It is compatible with Android and iOS.",
-    discord: "discord.gg/arceus",
-    website: "spdmteam.com",
+    unc: "100%",
+    sunc: "94%",
+    description: "Delta is a leading script executor for Roblox that allows users to run scripts to modify and enhance their gaming experience. It is compatible with Android and iOS.",
+    discord: "discord.gg/deltaex",
+    website: "deltaexploits.gg",
     recommended: "MOBILE RECOMMENDED",
+    decompiler: false,
+    multiInject: false,
   },
 ];
 
@@ -108,6 +121,27 @@ const ExecutorCard = ({ executor }: { executor: ExecutorProps }) => {
         <div className="bg-white/10 rounded px-2 py-1 text-sm">
           sUNC: {executor.sunc}
         </div>
+      </div>
+
+      <div className="flex gap-4 mb-4">
+        <div className="flex items-center gap-2 text-sm">
+          <span>Decompiler:</span>
+          {executor.decompiler ? (
+            <Check className="w-4 h-4 text-green-500" />
+          ) : (
+            <X className="w-4 h-4 text-red-500" />
+          )}
+        </div>
+        {executor.hasOwnProperty('multiInject') && (
+          <div className="flex items-center gap-2 text-sm">
+            <span>Multi-Inject:</span>
+            {executor.multiInject ? (
+              <Check className="w-4 h-4 text-green-500" />
+            ) : (
+              <X className="w-4 h-4 text-red-500" />
+            )}
+          </div>
+        )}
       </div>
       
       <p className="text-white/70 mb-4">{executor.description}</p>
@@ -182,7 +216,13 @@ const Executors = () => {
           <p className="text-lg md:text-xl text-white/70 max-w-3xl mx-auto">
             Explore our recommended execution platforms to run Maniez Hub scripts.
             <br />
-            <span className="text-sm text-white/50 italic mt-2 inline-block">Some information is based on Team Component, discord.gg/component</span>
+            <span className="text-sm text-white/50 italic mt-2 inline-block">
+              Information is based on whatexpsare.online, weao.xyz, discord.gg/weao, and Numelon.
+            </span>
+            <br />
+            <span className="text-sm text-white/50 italic mt-2 inline-block">
+              A failed function does not always mean it is broken or missing. It may still work, but failed one of sUNC's checks.
+            </span>
           </p>
         </div>
 
