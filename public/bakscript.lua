@@ -1,12 +1,5 @@
-local exception_executors = {"Xeno", "Solara"}
-local executor_name = (getexecutorname and getexecutorname()) or (identifyexecutor and identifyexecutor())
-
-if executor_name and table.find(exception_executors, executor_name) then
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/Matiftzy/maniezhub/refs/heads/main/tsbgfarm/memorysaver.lua"))()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/Matiftzy/maniezhub/refs/heads/main/tsbgfarm/alt.lua"))()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/Matiftzy/maniezhub/refs/heads/main/tsbgfarm/main.lua"))()
-else
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/Matiftzy/maniezhub/refs/heads/main/tsbgfarm/memorysaver.lua"))()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/Matiftzy/maniezhub/refs/heads/main/tsbgfarm/alt.lua"))()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/Matiftzy/maniezhub/refs/heads/main/tsbgfarm/main.lua"))()
+if game.PlaceId == 10449761463 then
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Matiftzy/maniezhub/main/tsbgfarm/keysystem.lua"))()
+elseif game.PlaceId == 121383396916457 then
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Matiftzy/maniezhub/main/fbgfarm/farm.lua"))()
 end
