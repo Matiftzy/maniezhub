@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import { Badge } from '@/components/ui/badge';
@@ -75,7 +74,7 @@ const executorsList: ExecutorProps[] = [
   },
   {
     name: "Delta",
-    logo: "assets/arceusx.png",
+    logo: "assets/delta-logo.png",
     cost: "FREE",
     unc: "100%",
     sunc: "94%",
