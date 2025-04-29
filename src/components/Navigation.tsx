@@ -1,13 +1,14 @@
 
 import React, { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import Discord from '@/components/icons/Discord';
 
 type NavLink = {
   name: string;
   href: string;
+  isExternal?: boolean;
 };
 
 const navLinks: NavLink[] = [
@@ -17,7 +18,7 @@ const navLinks: NavLink[] = [
   { name: 'Pricing', href: '#pricing' },
   { name: 'Reviews', href: '#reviews' },
   { name: 'FAQ', href: '#faq' },
-  { name: 'Bak Script', href: '/bakscript.lua' }, // Tambahkan link Script baru
+  { name: 'Bak Script', href: '/bakscript.lua', isExternal: true },
 ];
 
 const DISCORD_LINK = "https://discord.com/invite/U3CVFrMPeT";
@@ -25,6 +26,7 @@ const DISCORD_LINK = "https://discord.com/invite/U3CVFrMPeT";
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -56,6 +58,47 @@ const Navigation = () => {
     setIsOpen(!isOpen);
   };
 
+  // Function to render nav links appropriately
+  const renderNavLink = (link: NavLink, index: number, onClick?: () => void) => {
+    if (link.isExternal) {
+      // External link or path that should reload the page
+      return (
+        <a
+          key={index}
+          href={link.href}
+          className="text-sm font-medium text-white/80 hover:text-white transition-colors duration-300"
+          onClick={onClick}
+        >
+          {link.name}
+        </a>
+      );
+    } else if (link.href.startsWith('#')) {
+      // Anchor link on the same page
+      return (
+        <a
+          key={index}
+          href={link.href}
+          className="text-sm font-medium text-white/80 hover:text-white transition-colors duration-300"
+          onClick={onClick}
+        >
+          {link.name}
+        </a>
+      );
+    } else {
+      // Internal route navigation
+      return (
+        <Link
+          key={index}
+          to={link.href}
+          className="text-sm font-medium text-white/80 hover:text-white transition-colors duration-300"
+          onClick={onClick}
+        >
+          {link.name}
+        </Link>
+      );
+    }
+  };
+
   return (
     <header
       className={cn(
@@ -65,23 +108,16 @@ const Navigation = () => {
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <Link to="/" className="text-2xl font-bold font-display tracking-tighter flex items-center">
+          {/* Use a standard <a> tag for the home link that points to the root */}
+          <a href="/" className="text-2xl font-bold font-display tracking-tighter flex items-center">
             <img src="/assets/logo.png" alt="Maniez Hub Logo" className="h-8 w-8 mr-2" />
             <span className="text-gradient">Maniez</span> Hub
-          </Link>
+          </a>
         </div>
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-8">
-          {navLinks.map((link, index) => (
-            <a
-              key={index}
-              href={link.href}
-              className="text-sm font-medium text-white/80 hover:text-white transition-colors duration-300"
-            >
-              {link.name}
-            </a>
-          ))}
+          {navLinks.map((link, index) => renderNavLink(link, index))}
           <a
             href={DISCORD_LINK}
             target="_blank"
@@ -128,16 +164,7 @@ const Navigation = () => {
         )}
       >
         <div className="flex flex-col py-6 px-4 gap-4">
-          {navLinks.map((link, index) => (
-            <a
-              key={index}
-              href={link.href}
-              onClick={toggleMenu}
-              className="text-md font-medium text-white/80 hover:text-white transition-colors duration-300 py-2"
-            >
-              {link.name}
-            </a>
-          ))}
+          {navLinks.map((link, index) => renderNavLink(link, index, toggleMenu))}
           <a
             href={DISCORD_LINK}
             target="_blank"

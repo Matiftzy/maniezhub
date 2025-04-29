@@ -1,7 +1,6 @@
 
 import React from 'react';
 import { cn } from '@/lib/utils';
-import { Link } from 'react-router-dom';
 import { Github } from 'lucide-react';
 import Discord from '@/components/icons/Discord';
 
@@ -19,9 +18,9 @@ const Footer = () => {
       <div className="container mx-auto px-6 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
           <div className="md:col-span-2">
-            <Link to="/" className="text-2xl font-bold font-display tracking-tighter mb-4 inline-block">
+            <a href="/" className="text-2xl font-bold font-display tracking-tighter mb-4 inline-block">
               <span className="text-gradient">Maniez</span> Hub
-            </Link>
+            </a>
             <p className="text-white/70 max-w-sm mb-6">
               Elevate your Roblox experience with the most advanced script execution platform available.
             </p>
