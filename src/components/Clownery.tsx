@@ -1,3 +1,4 @@
+
 import React, { useRef, useState } from 'react';
 import { Button } from './ui/button';
 import { VolumeX, Volume2, ZoomIn, X } from 'lucide-react';
@@ -34,14 +35,14 @@ const ClowneryItem: React.FC<ClowneryItemProps> = ({ imageSrc, soundSrc, comment
     setIsPlaying(false);
   };
 
-  // Class for smaller boxes
+  // Class for smaller boxes - modified to ensure they don't go out of bounds
   const boxClass = smallSize 
-    ? "flex flex-col items-center mb-8 p-3 bg-zinc-800/50 rounded-lg border border-zinc-700 h-[50%]" 
-    : "flex flex-col items-center mb-8 p-4 bg-zinc-800/50 rounded-lg border border-zinc-700";
+    ? "flex flex-col items-center mb-8 p-3 bg-zinc-800/50 rounded-lg border border-zinc-700 w-full" 
+    : "flex flex-col items-center mb-8 p-4 bg-zinc-800/50 rounded-lg border border-zinc-700 w-full";
 
   return (
     <div className={boxClass}>
-      <div className="relative w-full max-w-md">
+      <div className="relative w-full">
         <img 
           src={imageSrc} 
           alt="Clownery content" 
@@ -126,20 +127,20 @@ const Clownery = () => {
       imageSrc: "https://github.com/Matiftzy/maniezhub/blob/main/public/assets/antiafkclown.png?raw=true",
       soundSrc: "https://github.com/Matiftzy/maniezhub/raw/refs/heads/main/public/assets/laugh.mp3",
       comment: "no comment 💀💀",
-      smallSize: true  // Make this box smaller
+      smallSize: true
     },
     {
       imageSrc: "https://github.com/Matiftzy/maniezhub/blob/main/public/assets/clown4sensor.png?raw=true",
       soundSrc: "https://github.com/Matiftzy/maniezhub/raw/refs/heads/main/public/assets/bark.mp3",
       comment: "it's really pitiful for this dog, being ordered to bark 😢🥺😓",
-      smallSize: true  // Make this box smaller
+      smallSize: true
     }
   ];
 
   return (
     <section id="clownery" className="w-full py-16 bg-gradient-to-b from-zinc-900 to-black">
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-bold text-center mb-12 text-white">Clownery</h2>
+        <h2 className="text-4xl font-bold font-display text-center mb-12 text-white">Clownery</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {clownItems.map((item, index) => (
             <ClowneryItem
