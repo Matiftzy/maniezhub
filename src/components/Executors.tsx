@@ -108,7 +108,7 @@ const ExecutorCard = ({ executor }: { executor: ExecutorProps }) => {
           </div>
         </div>
         {executor.recommended && (
-          <Badge variant="outline" className="bg-white/10 text-white text-xs">
+          <Badge variant="outline" className="bg-white/10 text-white text-xs whitespace-normal text-right max-w-[120px]">
             {executor.recommended}
           </Badge>
         )}
