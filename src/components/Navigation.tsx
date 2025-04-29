@@ -93,21 +93,38 @@ const Navigation = () => {
           </a>
         </nav>
 
-        {/* Mobile Menu Button */}
+        {/* Mobile Menu Button with animation */}
         <button
           onClick={toggleMenu}
-          className="md:hidden text-white focus:outline-none"
+          className="md:hidden text-white focus:outline-none relative w-6 h-6"
           aria-label="Toggle Menu"
         >
-          {isOpen ? <X size={24} /> : <Menu size={24} />}
+          <div className="absolute inset-0 flex items-center justify-center">
+            <Menu 
+              size={24} 
+              className={cn(
+                "transition-all duration-300 transform",
+                isOpen ? "opacity-0 rotate-90 scale-0" : "opacity-100 rotate-0 scale-100"
+              )} 
+            />
+            <X 
+              size={24} 
+              className={cn(
+                "absolute transition-all duration-300 transform",
+                isOpen ? "opacity-100 rotate-0 scale-100" : "opacity-0 -rotate-90 scale-0"
+              )} 
+            />
+          </div>
         </button>
       </div>
 
-      {/* Mobile Navigation - Smaller, not full-screen */}
+      {/* Mobile Navigation - Smaller, not full-screen with animation */}
       <div
         className={cn(
-          'fixed top-16 right-4 w-64 bg-background/95 backdrop-blur-lg z-40 rounded-lg border border-white/10 shadow-lg transition-transform duration-300 ease-in-out md:hidden',
-          isOpen ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'
+          'fixed top-16 right-4 w-64 bg-background/95 backdrop-blur-lg z-40 rounded-lg border border-white/10 shadow-lg transition-all duration-300 ease-in-out md:hidden',
+          isOpen 
+            ? 'translate-x-0 opacity-100 scale-100' 
+            : 'translate-x-full opacity-0 scale-95 pointer-events-none'
         )}
       >
         <div className="flex flex-col py-6 px-4 gap-4">
