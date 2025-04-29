@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { cn } from '@/lib/utils';
 import { ArrowDown, Check, Copy } from 'lucide-react';
 import { toast } from '@/components/ui/use-toast';
+import GridBackground3D from './GridBackground3D';
 
 const Hero = () => {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -51,9 +52,15 @@ const Hero = () => {
       ref={heroRef} 
       className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden"
     >
+      {/* 3D Grid Motion Background */}
+      <GridBackground3D />
+      
+      {/* Semi-transparent overlay to ensure text visibility */}
+      <div className="absolute inset-0 bg-black/40 z-1"></div>
+
       {/* Background Elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200%] h-[200%] bg-[radial-gradient(circle,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[length:24px_24px] opacity-50 animate-rotate-slow"></div>
+      <div className="absolute inset-0 overflow-hidden z-[1]">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200%] h-[200%] bg-[radial-gradient(circle,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[length:24px_24px] opacity-30 animate-rotate-slow"></div>
         <div className="absolute -top-[10%] -left-[10%] w-[50%] h-[50%] bg-gradient-to-br from-white/5 to-transparent rounded-full blur-[120px]"></div>
         <div className="absolute -bottom-[10%] -right-[10%] w-[50%] h-[50%] bg-gradient-to-br from-white/5 to-transparent rounded-full blur-[120px]"></div>
       </div>
@@ -107,7 +114,7 @@ const Hero = () => {
         </div>
       </div>
 
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce-sm">
+      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce-sm z-10">
         <a href="#product" aria-label="Scroll down">
           <ArrowDown className="text-white/50 hover:text-white transition-colors duration-300" />
         </a>
