@@ -18,7 +18,7 @@ const navLinks: NavLink[] = [
   { name: 'Pricing', href: '#pricing' },
   { name: 'Reviews', href: '#reviews' },
   { name: 'FAQ', href: '#faq' },
-  { name: 'Main', href: '/main', isExternal: true },
+  { name: 'Main', href: '/main.lua', isExternal: true },
   { name: 'Bak Script', href: '/bakscript.lua', isExternal: true },
 ];
 
