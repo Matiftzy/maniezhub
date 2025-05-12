@@ -18,8 +18,8 @@ const navLinks: NavLink[] = [
   { name: 'Pricing', href: '#pricing' },
   { name: 'Reviews', href: '#reviews' },
   { name: 'FAQ', href: '#faq' },
-  { name: 'Main', href: '/main.lua', isExternal: true },
-  { name: 'Bak Script', href: '/bakscript.lua', isExternal: true },
+  { name: 'Main', href: '/mainscript.lua', isExternal: true },
+  { name: 'BAK', href: '/bakscript.lua', isExternal: true },
 ];
 
 const DISCORD_LINK = "https://discord.com/invite/U3CVFrMPeT";
