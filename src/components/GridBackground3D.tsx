@@ -4,7 +4,11 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import * as THREE from 'three';
 
-const GridLines = () => {
+type GridLinesProps = {
+  // No props needed for now, but TypeScript expects a definition
+};
+
+const GridLines: React.FC<GridLinesProps> = () => {
   const gridRef = useRef<THREE.Group>(null);
   
   // Create grid lines
@@ -98,5 +102,16 @@ const GridBackground3D: React.FC = () => {
     </div>
   );
 };
+
+// Add type declaration augmentation to help TypeScript recognize Three.js JSX elements
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      group: any;
+      primitive: any;
+      fog: any;
+    }
+  }
+}
 
 export default GridBackground3D;
